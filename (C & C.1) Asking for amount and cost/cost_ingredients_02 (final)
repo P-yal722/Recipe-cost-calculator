@@ -1,0 +1,22 @@
+# Component C.1 - asking for amount and cost
+# In this component we ask the user for the cost per package/bottle of their ingredient and how much that would contain, we store this in 2 lists for future calculations
+costs = []
+amounts_pack = []
+
+print("When you buy a pack or bottle of each of these ingredients how many mL or mg are in each?")
+print("How much does a pack/bottle of ")
+
+for ingredient in ingredients:
+    amount_pack = decimal_input(
+        "{} have?: ".format(ingredient))
+    amounts_pack.append(amount_pack)
+
+print(" ")
+
+print("And how much does each pack and bottle cost?")
+print("How much does a packet/bottle of ")
+
+for ingredient in ingredients:
+    cost = decimal_input(
+        " {} cost? $: " .format(ingredient))
+    costs.append(cost)

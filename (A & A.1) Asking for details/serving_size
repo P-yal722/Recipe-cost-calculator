@@ -1,0 +1,5 @@
+# Component A.1 - Serving size
+# This component asks the user for the serving size for their recipe and stores it in a variable
+no_of_servings = integer_input("How many servings your recipe for?: ")
+
+print("Awesome let's get started!")

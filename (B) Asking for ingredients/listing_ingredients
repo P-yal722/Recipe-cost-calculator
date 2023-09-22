@@ -1,0 +1,17 @@
+# Component B - asking for ingredients
+# This component asks for the number of ingredients their recipe has so it can give individual promts for he user to input each ingredient
+ingredients = []
+
+num_ingredients = integer_input(
+    "How many ingredients does your recipe have?: ")
+
+for i in range(num_ingredients):
+    ingredient = not_blank_input("Please list the ingredients you're going to use, press enter after each one (Or type in xxx to go to the next step): ")
+    print(" ")
+    ingredient = ingredient.strip()
+
+    if ingredient == "xxx":
+        break
+    else:
+        ingredients.append(ingredient.title())
+

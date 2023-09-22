@@ -1,0 +1,12 @@
+# Function to make sure that a decimal can be entered, same as the last function just the integer condition is changed to float
+def decimal_input(prompt):
+    while True:
+        try:
+            user_input = float(input(prompt))
+            if user_input > 0:
+                break
+            else:
+                print("Please type in a value greater than 0.")
+        except ValueError:
+            print("Please enter a number.")
+    return user_input

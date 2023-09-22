@@ -1,0 +1,12 @@
+# Component C - amount of ingredients for the recipe
+# This component asks for the amount of ingredients the user requires for their recipe by giving individual prompts for each ingredient
+amount_ingredients = []
+
+print("""Please use milligrams or millitres when typing the amount of each ingredient (you don't need to type mg or mL)
+      Type in the amount of """)
+
+for ingredient in ingredients:
+    amount_ingredient = decimal_input(
+        "{} required: " .format(ingredient))
+
+    amount_ingredients.append(amount_ingredient)

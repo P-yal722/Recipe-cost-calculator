@@ -1,0 +1,20 @@
+# Component A
+
+# Introduction
+print("Hi there,")
+print("This is the recipe cost calculator!")
+print("This program helps you calculate the price of a serving from a recipe.")
+
+# Asking for recipe name
+recipe_name = input("To start off type in the name of your recipe: ")
+
+# While loop for checking answer
+i = 0
+while i <= 1:
+    if recipe_name == "":
+        print("You cannot leave this blank, please try again")
+        recipe_name = input("Type in the name of your recipe: ")
+    else:
+        i += 1
+
+print("Oh {}, huh? That's cool!" .format(recipe_name.title()))

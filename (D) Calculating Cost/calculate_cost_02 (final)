@@ -1,0 +1,10 @@
+# Component D
+# Here we are calculating the cost of our ingredients. We are doing this by using our previous variables: (cost/amount per pacage) * amount needed
+# The for loop helps run through each of the values in our costs list and divide it with the corresponding value from the amounts_per_package list and then multiply it with the corresponding value from the amount_ingredients list
+
+total_cost = []
+
+for i in range(len(costs)):
+    total_cost.append((costs[i] / amounts_pack[i]) * amount_ingredients[i])
+
+total_cost = sum(total_cost)/no_of_servings

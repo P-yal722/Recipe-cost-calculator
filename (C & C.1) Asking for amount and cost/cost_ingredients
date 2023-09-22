@@ -1,0 +1,12 @@
+#Component C.1 
+costs = []
+amounts_pack = []
+
+for ingredient in ingredients:
+    cost = integer_input("How much does a packet/bottle of {} cost?" .format(ingredient))
+    costs.append(cost)
+    amount_pack = integer_input("And how much (in milligrams or milliters) will be in a packet/bottle of {}".format(ingredient))
+    amounts_pack.append(amount_pack)
+
+print(costs)
+print(amounts_pack)

@@ -1,0 +1,12 @@
+# Function to make sure that an integer is entered, also doesn't accept blank input and asks for input bigger than 0
+def integer_input(prompt):
+    while True:
+        try:
+            user_input = int(input(prompt))
+            if user_input > 0:
+                break
+            else:
+                print("Please type in a number greater than 0.")
+        except ValueError:
+            print("Please enter a number.")
+    return user_input

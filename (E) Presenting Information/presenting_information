@@ -1,0 +1,8 @@
+# Component E
+# This component will let the user know how much each serving of their recipe costs.
+
+print("The cost per serving for the recipe {} is ${:.2f}" .format(
+    recipe_name.title(), total_cost))
+print(" ")
+print("Thank you for using the recipe cost calculator!")
+print("See you again next time!")

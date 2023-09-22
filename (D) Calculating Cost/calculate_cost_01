@@ -1,0 +1,12 @@
+
+# component D
+# here we are calculating the cost of our ingredients
+# cost/amount per pacage * amount needed
+
+total_cost = []
+
+for i in range(len(costs)):
+    total_cost.append((costs[i] / amounts_pack[i]) * amount_ingredients[i])
+
+print("$", sum(total_cost)/no_of_servings)
+

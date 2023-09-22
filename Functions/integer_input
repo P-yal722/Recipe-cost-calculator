@@ -1,0 +1,11 @@
+#function to make sure that a integer is entered
+
+def integer_input(prompt):
+    user_input = input(prompt)
+    try:
+        integer_value = int(user_input)
+        return integer_value
+    except ValueError:
+        print("Please enter a number!")
+        return integer_input(prompt)
+    

@@ -1,0 +1,8 @@
+# Function that will allow us to ensure that questions with strings aren't left blank.
+def not_blank_input(prompt):
+    while True:
+        user_input = input(prompt)
+        if user_input:
+            return user_input
+        else:
+            print("Please provide an input.")

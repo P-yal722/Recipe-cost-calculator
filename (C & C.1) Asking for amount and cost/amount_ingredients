@@ -1,0 +1,12 @@
+print("") #for space between promts and information
+
+# Component C
+amount_ingredients = []
+
+for ingredient in ingredients:
+    amount_ingredient = decimal_input("""Please use milligrams or millitres when adding amount of ingredients (You don't need to type mg or mL)
+    Type in the amount of {} required for this recipe: """ .format(ingredient))
+
+    amount_ingredients.append(amount_ingredient)
+
+print(amount_ingredients)
