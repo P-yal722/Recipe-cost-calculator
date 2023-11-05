@@ -9,20 +9,6 @@ def not_blank_input(prompt):
         else:
             print("Please provide an input.")
 
-
-# Function to make sure that an integer is entered, also doesn't accept blank input and asks for input bigger than 0
-def integer_input(prompt):
-    while True:
-        try:
-            user_input = int(input(prompt))
-            if user_input > 0:
-                break
-            else:
-                print("Please type in a number greater than 0.")
-        except ValueError:
-            print("Please enter a number.")
-    return user_input
-
 # Function to make sure that a decimal can be entered, same as the last function just the integer condition is changed to float
 def decimal_input(prompt):
     while True:
@@ -37,10 +23,15 @@ def decimal_input(prompt):
     return user_input
 
 
+# this is a multidimentional dictionary and holds all of my variables, and lists. The first dictionary in this dictionary called recipe details which holds 2 variables, the second one is called ingredient_for_recipe and hold 3 lists, the last one is ingredient details which hold 3 other lists
+all_info = {
+    'recipe_details': {'recipe_name', 'no_of_servings', 'unit'},
+    'ingredient_for_recipe': {'num_ingredients': [], 'ingredients': [], 'amount_ingredients': []},
+    'ingredient_details': {'costs': [], 'amounts_pack': [], }
+}
+
 # Component A - Introduction
-print("Hiya!")
-print("Welcome to the recipe cost calculator!")
-print("This program helps you calculate the price of a serving from a recipe!")
+print("Hiya!, welcome to the recipe cost calculator! This program helps you calculate the price of a serving from a recipe!")
 
 print(" ")
 
@@ -51,20 +42,25 @@ print("Oh {}, huh? That's cool! Let's get started" .format(recipe_name.title()))
 
 print(" ")
 
-# Component A.1 - Serving size
-# This component asks the user for the serving size for their recipe and stores it in a variable
+# Component A.1 - Serving size. This component asks the user for the serving size for their recipe and stores it in a variable
 no_of_servings = decimal_input("How many servings your recipe for?: ")
 
 print("Awesome let's get started!")
 
 print(" ")
 
-# Component B - asking for ingredients
-# This component asks for the number of ingredients their recipe has so it can give individual promts for he user to input each ingredient
-ingredients = []
+# Component B - asking for ingredients. This component asks for the number of ingredients their recipe has so it can give individual promts for he user to input each ingredient
+while True:
+    try:
+        num_ingredients = int(
+            input("How many ingredients does your recipe have?: "))
+        if num_ingredients > 0:
+            break
+        else:
+            print("Please enter a value greater than 0.")
+    except ValueError:
+        print("Please enter a number!")
 
-num_ingredients = integer_input(
-    "How many ingredients does your recipe have?: ")
 
 print(" ")
 
@@ -79,64 +75,56 @@ for i in range(num_ingredients):
     if ingredient == "xxx":
         break
     else:
-        ingredients.append(ingredient.title())
+        all_info['ingredient_for_recipe']['ingredients'].append(
+            ingredient.title())
 
 print(" ")
 
-# Component C - amount of ingredients for the recipe
-# This component asks for the amount of ingredients the user requires for their recipe by giving individual prompts for each ingredient
-amount_ingredients = []
+# Component C - amount of ingredients for the recipe. This component asks for the amount of ingredients the user requires for their recipe by giving individual prompts for each ingredient
+unit = input("What unit will you be using? Eg: kg, mg, mL, piece, Tablespoon, teaspoon etc. Make sure to stick to the same unit throughout the rest of the program: ")
 
-print("Please use grams or millitres when typing the amount of each ingredient to ensure the correct calculations (you don't need to type mg or mL)")
 print("Type in the amount of")
 
-
-for ingredient in ingredients:
+for ingredient in all_info['ingredient_for_recipe']['ingredients']:
     amount_ingredient = decimal_input(
         "{} required: " .format(ingredient))
 
-    amount_ingredients.append(amount_ingredient)
+    all_info['ingredient_for_recipe']['amount_ingredients'].append(
+        amount_ingredient)
 
 print(" ")
 
-# Component C.1 - asking for amount and cost
-# In this component we ask the user for the cost per package/bottle of their ingredient and how much that would contain, we store this in 2 lists for future calculations
-costs = []
-amounts_pack = []
-
-print("When you buy a pack or bottle of each of these ingredients how many mL or mg are in each?")
+# Component C.1 - asking for amount and cost. In this component we ask the user for the cost per package/bottle of their ingredient and how much that would contain, we store this in 2 lists for future calculations
+print("When you buy a pack or bottle of each of these ingredients how many {}s are in each?" .format(unit))
 print("How much does a pack/bottle of ")
 
-for ingredient in ingredients:
+for ingredient in all_info['ingredient_for_recipe']['ingredients']:
     amount_pack = decimal_input(
-        "{} have?: ".format(ingredient)) 
-    amounts_pack.append(amount_pack)
+        "{} have?: ".format(ingredient))
+    all_info['ingredient_details']['amounts_pack'].append(amount_pack)
 
 print(" ")
 
 print("And how much does each pack and bottle cost?")
 print("How much does a packet/bottle of ")
 
-for ingredient in ingredients:
+for ingredient in all_info['ingredient_for_recipe']['ingredients']:
     cost = decimal_input(
         " {} cost? $: " .format(ingredient))
-    costs.append(cost)
+    all_info['ingredient_details']['costs'].append(cost)
 
 print(" ")
 
-# Component D
-# Here we are calculating the cost of our ingredients. We are doing this by using our previous variables: (cost/amount per pacage) * amount needed
-# The for loop helps run through each of the values in our costs list and divide it with the corresponding value from the amounts_per_package list and then multiply it with the corresponding value from the amount_ingredients list
-
+# Component D. Here we are calculating the cost of our ingredients. We are doing this by using our previous variables: (cost/amount per pacage) * amount needed. The for loop helps run through each of the values in our costs list and divide it with the corresponding value from the amounts_per_package list and then multiply it with the corresponding value from the amount_ingredients list
 total_cost = []
 
-for i in range(len(costs)):
-    total_cost.append((costs[i] / amounts_pack[i]) * amount_ingredients[i])
+for i in range(len(all_info['ingredient_details']['costs'])):
+    total_cost.append((all_info['ingredient_details']['costs'][i] / all_info['ingredient_details']
+                      ['amounts_pack'][i]) * all_info['ingredient_for_recipe']['amount_ingredients'][i])
 
 total_cost = sum(total_cost)/no_of_servings
 
-# Component E
-# This component will let the user know how much each serving of their recipe costs.
+# Component E. This component will let the user know how much each serving of their recipe costs.
 
 print("The cost per serving for the recipe {} is ${:.2f}" .format(
     recipe_name.title(), total_cost))

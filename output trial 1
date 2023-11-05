@@ -1,0 +1,145 @@
+# This is the Recipe Cost Calculator, made by Priyal
+
+# Function that will allow us to ensure that questions with strings aren't left blank.
+def not_blank_input(prompt):
+    while True:
+        user_input = input(prompt)
+        if user_input:
+            return user_input
+        else:
+            print("Please provide an input.")
+
+
+# Function to make sure that an integer is entered, also doesn't accept blank input and asks for input bigger than 0
+def integer_input(prompt):
+    while True:
+        try:
+            user_input = int(input(prompt))
+            if user_input > 0:
+                break
+            else:
+                print("Please type in a number greater than 0.")
+        except ValueError:
+            print("Please enter a number.")
+    return user_input
+
+# Function to make sure that a decimal can be entered, same as the last function just the integer condition is changed to float
+def decimal_input(prompt):
+    while True:
+        try:
+            user_input = float(input(prompt))
+            if user_input > 0:
+                break
+            else:
+                print("Please type in a value greater than 0.")
+        except ValueError:
+            print("Please enter a number.")
+    return user_input
+
+
+# Component A - Introduction
+print("Hiya!")
+print("Welcome to the recipe cost calculator!")
+print("This program helps you calculate the price of a serving from a recipe!")
+
+print(" ")
+
+# Asking the user for a recipe name and storing it in a variable
+recipe_name = not_blank_input("To start off type in the name of your recipe: ")
+
+print("Oh {}, huh? That's cool! Let's get started" .format(recipe_name.title()))
+
+print(" ")
+
+# Component A.1 - Serving size
+# This component asks the user for the serving size for their recipe and stores it in a variable
+no_of_servings = decimal_input("How many servings your recipe for?: ")
+
+print("Awesome let's get started!")
+
+print(" ")
+
+# Component B - asking for ingredients
+# This component asks for the number of ingredients their recipe has so it can give individual promts for he user to input each ingredient
+ingredients = []
+
+num_ingredients = integer_input(
+    "How many ingredients does your recipe have?: ")
+
+print(" ")
+
+print("Please list the ingredients you're going to use, press enter after each one (Or type in xxx to go to the next step)")
+
+for i in range(num_ingredients):
+    ingredient = not_blank_input(
+        "Ingredient no {}: " .format(i+1))
+    print(" ")
+    ingredient = ingredient.strip()
+
+    if ingredient == "xxx":
+        break
+    else:
+        ingredients.append(ingredient.title())
+
+print(" ")
+
+# Component C - amount of ingredients for the recipe
+# This component asks for the amount of ingredients the user requires for their recipe by giving individual prompts for each ingredient
+amount_ingredients = []
+
+print("Please use grams or millitres when typing the amount of each ingredient to ensure the correct calculations (you don't need to type mg or mL)")
+print("Type in the amount of")
+
+
+for ingredient in ingredients:
+    amount_ingredient = decimal_input(
+        "{} required: " .format(ingredient))
+
+    amount_ingredients.append(amount_ingredient)
+
+print(" ")
+
+# Component C.1 - asking for amount and cost
+# In this component we ask the user for the cost per package/bottle of their ingredient and how much that would contain, we store this in 2 lists for future calculations
+costs = []
+amounts_pack = []
+
+print("When you buy a pack or bottle of each of these ingredients how many mL or mg are in each?")
+print("How much does a pack/bottle of ")
+
+for ingredient in ingredients:
+    amount_pack = decimal_input(
+        "{} have?: ".format(ingredient)) 
+    amounts_pack.append(amount_pack)
+
+print(" ")
+
+print("And how much does each pack and bottle cost?")
+print("How much does a packet/bottle of ")
+
+for ingredient in ingredients:
+    cost = decimal_input(
+        " {} cost? $: " .format(ingredient))
+    costs.append(cost)
+
+print(" ")
+
+# Component D
+# Here we are calculating the cost of our ingredients. We are doing this by using our previous variables: (cost/amount per pacage) * amount needed
+# The for loop helps run through each of the values in our costs list and divide it with the corresponding value from the amounts_per_package list and then multiply it with the corresponding value from the amount_ingredients list
+
+total_cost = []
+
+for i in range(len(costs)):
+    total_cost.append((costs[i] / amounts_pack[i]) * amount_ingredients[i])
+
+total_cost = sum(total_cost)/no_of_servings
+
+# Component E
+# This component will let the user know how much each serving of their recipe costs.
+
+print("The cost per serving for the recipe {} is ${:.2f}" .format(
+    recipe_name.title(), total_cost))
+print(" ")
+print("Thank you for using the recipe cost calculator!")
+print("See you again next time!")
